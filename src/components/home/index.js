@@ -1,5 +1,5 @@
 import React from "react";
-import Tuits from "../tuits";
+import TuitsList from "../tuits";
 import * as service from "../../services/tuits-service";
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
@@ -46,7 +46,7 @@ const Home = () => {
                   onChange={(e) =>
                       setTuit(e.target.value)}
                 placeholder="What's happening?"
-                className="w-100 border-0"></textarea>
+                className="w-100 border-0"/>
               <div className="row">
                 <div className="col-10 ttr-font-size-150pc text-primary">
                   <i className="fas fa-portrait me-3"></i>
@@ -68,7 +68,7 @@ const Home = () => {
           </div>
         }
       </div>
-      <Tuits tuits={tuits} deleteTuit={deleteTuit}/>
+      <TuitsList tuits={tuits} deleteTuit={deleteTuit}/>
     </div>
   );
 };

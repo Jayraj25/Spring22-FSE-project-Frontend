@@ -11,7 +11,7 @@ import {HashRouter} from "react-router-dom";
 import Tuiter from "../components/tuiter";
 import React from "react";
 
-jest.mock("axios");
+// jest.mock("axios");
 
 const MOCKED_USERS = [
   {username: 'ellen_ripley', password: 'lv426', email: 'repley@weyland.com'},
@@ -63,9 +63,10 @@ describe('www', () => {
     axios.get.mockImplementation(() =>
       Promise.resolve({ data: {users: MOCKED_USERS} }));
 
-    act(() => {
-      render(<Tuiter/>)
-    });
+    render(<Tuiter/>);
+    // act(() => {
+    //   render(<Tuiter/>)
+    // });
   });
 
 
@@ -256,18 +257,20 @@ describe('findAllUsers',  () => {
 
   afterAll(() =>
     // delete the users we inserted
-    usernames.map(username =>
+    Promise.all(usernames.map(username =>
       deleteUsersByUsername(username)
-    )
+    ))
   );
 
   test('user service can retrieve all users from database', async () => {
 
+    const mock = jest.spyOn(axios, 'get');
+    mock.mockImplementation(() =>
+        Promise.resolve({ data: {users: MOCKED_USERS} }));
     const users = await findAllUsers();
+    expect(users.users.length).toBeGreaterThanOrEqual(MOCKED_USERS.length);
 
-    expect(users.length).toBeGreaterThanOrEqual(usernames.length);
-
-    const usersWeInserted = users.filter(
+    const usersWeInserted = users.users.filter(
       user => usernames.indexOf(user.username) >= 0);
 
     usersWeInserted.forEach(user => {
@@ -276,5 +279,6 @@ describe('findAllUsers',  () => {
       expect(user.password).toEqual(`${username}123`);
       expect(user.email).toEqual(`${username}@stooges.com`);
     });
+    mock.mockRestore();  // restore original implementation
   });
 });

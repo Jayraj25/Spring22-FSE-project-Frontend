@@ -1,5 +1,5 @@
 import React from "react";
-import Tuits from "../tuits";
+import TuitsList from "../tuits";
 import {Link} from "react-router-dom";
 
 const Profile = () => {
@@ -67,7 +67,7 @@ const Profile = () => {
           </ul>
         </div>
       </div>
-      <Tuits/>
+      <TuitsList/>
     </div>
   );
 }
