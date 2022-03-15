@@ -24,7 +24,7 @@ const Home = () => {
     let isMounted = true;
     findTuits();
     return () => {isMounted = false;}
-  }, [findTuits]);
+  });
   const createTuit = () =>
       service.createTuit(userId, {tuit})
           .then(findTuits)
