@@ -27,7 +27,7 @@ function Navigation() {
          ${pathname.indexOf(link.path) >= 0 ? 'fw-bold':''}`}>
           <Link to={link.path} id={link.label}
              className="text-decoration-none text-black">
-            <i className={`fa ${link.icon} text-center`}></i>
+            <i className={`fa ${link.icon} text-center`}/>
             <span className="ttr-label">{link.label}</span>
           </Link>
         </li>
@@ -39,6 +39,6 @@ function Navigation() {
       Tuit</a>
     </div>
   );
-};
+}
 
 export default Navigation;

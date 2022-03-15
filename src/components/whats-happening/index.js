@@ -6,7 +6,7 @@ function WhatsHappening() {
  return(
   <div className="ttr-whats-happening p-2">
    <div className="ttr-search position-relative">
-    <i className="fas fa-search position-absolute"></i>
+    <i className="fas fa-search position-absolute"/>
     <input className="bg-secondary bg-opacity-10 border-0 form-control form-control-lg rounded-pill ps-5"
            placeholder="Search Tuiter"/>
    </div>
@@ -26,7 +26,7 @@ function WhatsHappening() {
            </div>
            <div>
             <img src={`../images/${wh['user-logo']}`}
-                 className="ttr-rounded-15px ttr-user-logo"/>
+                 className="ttr-rounded-15px ttr-user-logo" alt=""/>
            </div>
           </div>
        );
