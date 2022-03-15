@@ -3,8 +3,11 @@ import axios from "axios";
 // const TUITS_API = "https://cs5500-01-sp22.herokuapp.com/api/tuits";
 // const USERS_API = "https://cs5500-01-sp22.herokuapp.com/api/users";
 
-const TUITS_API = "http://localhost:4000/api/tuits";
-const USERS_API = "http://localhost:4000/api/users";
+// const TUITS_API = "http://localhost:4000/api/tuits";
+// const USERS_API = "http://localhost:4000/api/users";
+
+const TUITS_API = "https://intense-retreat-47646.herokuapp.com/api/tuits";
+const USERS_API = "https://intense-retreat-47646.herokuapp.com/api/users";
 
 
 export const findAllTuits = () =>
