@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router-dom";
+// import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import * as service from "../../services/users-service";
 import React from "react";
@@ -12,10 +12,10 @@ export const Login = () => {
   const [loginUser, setLoginUser] = useState({});
   // const navigate = useNavigate()
 
-  const uuu = [
-    {username: 'ellen_ripley', email: 'ellen_ripley', password: 'ellen_ripley', _id: '123'},
-    {username: 'sarah', email: 'ellen_ripley', password: 'ellen_ripley', _id: '234'}
-  ]
+  // const uuu = [
+  //   {username: 'ellen_ripley', email: 'ellen_ripley', password: 'ellen_ripley', _id: '123'},
+  //   {username: 'sarah', email: 'ellen_ripley', password: 'ellen_ripley', _id: '234'}
+  // ]
 
   const deleteUser = (uid) =>
     service.deleteUser(uid)

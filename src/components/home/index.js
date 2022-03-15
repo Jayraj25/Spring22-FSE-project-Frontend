@@ -20,10 +20,11 @@ const Home = () => {
     }
   }
   useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
     let isMounted = true;
-    findTuits()
+    findTuits();
     return () => {isMounted = false;}
-  }, []);
+  }, [findTuits]);
   const createTuit = () =>
       service.createTuit(userId, {tuit})
           .then(findTuits)
@@ -57,11 +58,11 @@ const Home = () => {
                   <i className="far fa-map-location me-3"/>
                 </div>
                 <div className="col-2">
-                  <a onClick={createTuit}
+                  <button onClick={createTuit}
                      className={`btn btn-primary rounded-pill fa-pull-right
                                   fw-bold ps-4 pe-4`}>
                     Tuit
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
