@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 import Tuits from "../tuits";
+=======
+import React from "react";
+import TuitsList from "../tuits";
+>>>>>>> A3
 import {Link} from "react-router-dom";
 
 const Profile = () => {
   return(
     <div className="ttr-profile">
       <div className="border border-bottom-0">
+<<<<<<< HEAD
         <h4 className="p-2 mb-0 pb-0 fw-bolder">NASA<i className="fa fa-badge-check text-primary"></i></h4>
         <span className="ps-2">67.6K Tuits</span>
         <div className="mb-5 position-relative">
@@ -13,6 +19,16 @@ const Profile = () => {
             <div className="position-relative">
               <img className="position-relative ttr-z-index-1 ttr-top-40px ttr-width-150px"
                    src="../images/nasa-3.png"/>
+=======
+        <h4 className="p-2 mb-0 pb-0 fw-bolder">NASA<i className="fa fa-badge-check text-primary"/></h4>
+        <span className="ps-2">67.6K Tuits</span>
+        <div className="mb-5 position-relative">
+          <img className="w-100" src={`../images/nasa-profile-header.jpg`} alt=""/>
+          <div className="bottom-0 left-0 position-absolute">
+            <div className="position-relative">
+              <img className="position-relative ttr-z-index-1 ttr-top-40px ttr-width-150px"
+                   src={`../images/nasa-3.png`} alt=""/>
+>>>>>>> A3
             </div>
           </div>
           <Link to="/profile/edit"
@@ -23,13 +39,18 @@ const Profile = () => {
 
         <div className="p-2">
           <h4 className="fw-bolder pb-0 mb-0">
+<<<<<<< HEAD
             NASA<i className="fa fa-badge-check text-primary"></i>
+=======
+            NASA<i className="fa fa-badge-check text-primary"/>
+>>>>>>> A3
           </h4>
           <h6 className="pt-0">@NASA</h6>
           <p className="pt-2">
             There's space for everybody. Sparkles
           </p>
           <p>
+<<<<<<< HEAD
             <i className="far fa-location-dot me-2"></i>
             Pale Blue Dot
             <i className="far fa-link ms-3 me-2"></i>
@@ -38,6 +59,16 @@ const Profile = () => {
             Born October 1, 1958
             <br/>
             <i className="far fa-calendar me-2"></i>
+=======
+            <i className="far fa-location-dot me-2"/>
+            Pale Blue Dot
+            <i className="far fa-link ms-3 me-2"/>
+            <a href="nasa.gov" className="text-decoration-none">nasa.gov</a>
+            <i className="far fa-balloon ms-3 me-2"/>
+            Born October 1, 1958
+            <br/>
+            <i className="far fa-calendar me-2"/>
+>>>>>>> A3
             Joined December 2007
           </p>
           <b>178</b> Following
@@ -66,7 +97,11 @@ const Profile = () => {
           </ul>
         </div>
       </div>
+<<<<<<< HEAD
       <Tuits/>
+=======
+      <TuitsList/>
+>>>>>>> A3
     </div>
   );
 }

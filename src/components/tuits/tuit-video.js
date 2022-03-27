@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import React from "react";
+>>>>>>> A3
 const TuitVideo = ({tuit}) => {
   return(
     <div

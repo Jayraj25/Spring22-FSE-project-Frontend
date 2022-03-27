@@ -13,7 +13,11 @@ function WhatsHappening() {
     ${
      whatsHappening.map(wh => {
        return(`
+<<<<<<< HEAD
          <div class="ttr-whats-happening-tuit d-flex mb-3">
+=======
+         <div key={wh._id} class="ttr-whats-happening-tuit d-flex mb-3">
+>>>>>>> A3
            <div class="flex-grow-1">
             <h3 class="fs-6 fw-lighter">
              ${wh.topic} - ${wh['hours-ago']} hours ago</h3>
