@@ -68,8 +68,8 @@ const Profile = () => {
           <b className="ms-4">51.1M</b> Followers
           <ul className="mt-4 nav nav-pills nav-fill">
             <li className="nav-item">
-              <Link to="/profile/mytuits"
-                    className={`nav-link ${location.pathname.indexOf('mytuits') >= 0 ? 'active':''}`}>
+              <Link to="/profile/my-tuits"
+                    className={`nav-link ${location.pathname.indexOf('my-tuits') >= 0 ? 'active':''}`}>
                 Tuits</Link>
             </li>
             <li className="nav-item">

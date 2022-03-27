@@ -35,7 +35,7 @@ const Home = () => {
                 onChange={(e) =>
                     setTuit(e.target.value)}
               placeholder="What's happening?"
-                className="w-100 border-0">What's on your mind?</textarea>
+                className="w-100 border-0"></textarea>
             <div className="row">
               <div className="col-10 ttr-font-size-150pc text-primary">
                 <i className="fas fa-portrait me-3"/>

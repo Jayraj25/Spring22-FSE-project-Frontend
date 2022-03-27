@@ -5,6 +5,7 @@ import TuitVideo from "./tuit-video";
 import {useNavigate, Link} from "react-router-dom";
 
 const Tuit = ({tuit, deleteTuit, likeTuit}) => {
+    console.log("tuit" + tuit.createdBy.username);
     const navigate = useNavigate();
     const daysOld = (tuit) => {
         const now = new Date();
@@ -45,8 +46,7 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
           </Link>
         <h2
           className="fs-5">
-          {tuit.createdBy && tuit.createdBy.username}
-          @{tuit.createdBy && tuit.createdBy.username} -
+          {tuit.createdBy.username}@{tuit.createdBy.username} -
             <span className="ms-1">{daysOld(tuit)}</span></h2>
         {tuit.tuit}
         {
