@@ -1,20 +1,9 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import React from "react";
->>>>>>> A3
-=======
-import React from "react";
->>>>>>> A4-dislikes-feature
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
 import {useNavigate, Link} from "react-router-dom";
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-const Tuit = ({tuit}) => {
-=======
 const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
     console.log("tuit" + tuit.createdBy.username);
     const navigate = useNavigate();
@@ -40,63 +29,37 @@ const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
         }
         return old;
     }
->>>>>>> A4-dislikes-feature
-  return(
-    // <li onClick={() => navigate(`/tuit/${tuit._id}`)}
-    <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
-      <div className="pe-2">
-        {
-          tuit.createdBy &&
-          <img src={`../images/${tuit.createdBy.username}.jpg`}
-               className="ttr-tuit-avatar-logo rounded-circle" alt=""/>
-        }
-      </div>
-      <div className="w-100">
-          <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"/>
-          <Link to={`/tuit/${tuit._id}`}>
-          <i className="float-end fas fa-circle-ellipsis me-1"/>
-          </Link>
-        <h2
-<<<<<<< HEAD
-          className="fs-5">{tuit.username} @{tuit.handle} - {tuit.published}</h2>
-        {tuit.content}
-=======
-const Tuit = ({tuit, deleteTuit}) => {
-  return(
-    <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
-      <div className="pe-2">
-        {
-          tuit.createdBy &&
-          <img src={`../images/${tuit.createdBy.username}.jpg`}
-               className="ttr-tuit-avatar-logo rounded-circle" alt=""/>
-        }
-      </div>
-      <div className="w-100">
-          <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"/>
-        <h2
-          className="fs-5">
-          {tuit.createdBy && tuit.createdBy.username}
-            @{tuit.createdBy && tuit.createdBy.username} -
-            {tuit.postedOn}</h2>
-        {tuit.tuit}
->>>>>>> A3
-=======
-          className="fs-5">
-          {tuit.createdBy.username}@{tuit.createdBy.username} -
-            <span className="ms-1">{daysOld(tuit)}</span></h2>
-        {tuit.tuit}
->>>>>>> A4-dislikes-feature
-        {
-          tuit.youtube &&
-            <TuitVideo tuit={tuit}/>
-        }
-        {
-          tuit.image &&
-          <TuitImage tuit={tuit}/>
-        }
-        <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit}/>
-      </div>
-    </li>
-  );
+    return(
+        // <li onClick={() => navigate(`/tuit/${tuit._id}`)}
+        <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
+            <div className="pe-2">
+                {
+                    tuit.createdBy &&
+                    <img src={`../images/${tuit.createdBy.username}.jpg`}
+                         className="ttr-tuit-avatar-logo rounded-circle" alt=""/>
+                }
+            </div>
+            <div className="w-100">
+                <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"/>
+                <Link to={`/tuit/${tuit._id}`}>
+                    <i className="float-end fas fa-circle-ellipsis me-1"/>
+                </Link>
+                <h2
+                    className="fs-5">
+                    {tuit.createdBy.username}@{tuit.createdBy.username} -
+                    <span className="ms-1">{daysOld(tuit)}</span></h2>
+                {tuit.tuit}
+                {
+                    tuit.youtube &&
+                    <TuitVideo tuit={tuit}/>
+                }
+                {
+                    tuit.image &&
+                    <TuitImage tuit={tuit}/>
+                }
+                <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit}/>
+            </div>
+        </li>
+    );
 }
 export default Tuit;

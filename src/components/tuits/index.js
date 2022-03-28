@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-import tuits from "./tuits-data.json";
-=======
 import React from "react";
->>>>>>> A4-dislikes-feature
 import './tuits.css';
 import Tuit from "./tuit";
 import * as likesService from "../../services/likes-service";
@@ -27,45 +22,18 @@ const Tuits = ({tuits = [], refreshTuits}) => {
 
     return (
         <div>
-          <ul className="ttr-tuits list-group">
-            {
-              tuits.map && tuits.map(tuit =>
-                  <Tuit key={tuit._id}
-                        deleteTuit={deleteTuit}
-                        likeTuit={likeTuit}
-                        dislikeTuit={dislikeTuit}
-                        tuit={tuit}/>)
-            }
-          </ul>
+            <ul className="ttr-tuits list-group">
+                {
+                    tuits.map && tuits.map(tuit =>
+                        <Tuit key={tuit._id}
+                              deleteTuit={deleteTuit}
+                              likeTuit={likeTuit}
+                              dislikeTuit={dislikeTuit}
+                              tuit={tuit}/>)
+                }
+            </ul>
         </div>
-      );
-}
-<<<<<<< HEAD
-export default Tuits;
-=======
-import React from "react";
-import './tuits.css';
-import Tuit from "./tuit";
-
-function TuitsList({tuits = [], deleteTuit}) {
-    return (
-    <div>
-      <ul className="ttr-tuits list-group">
-        {
-          tuits.map && tuits.map(tuit => {
-            return (
-              <Tuit key={tuit._id} deleteTuit={deleteTuit} tuit={tuit}/>
-            );
-          })
-        }
-      </ul>
-    </div>
-  );
+    );
 }
 
-export default TuitsList;
->>>>>>> A3
-=======
-
 export default Tuits;
->>>>>>> A4-dislikes-feature
