@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import React from "react";
+>>>>>>> A4-dislikes-feature
 import logo from './logo.svg';
 =======
 import React from "react";
@@ -10,10 +14,14 @@ import './styles.css';
 // import WhatsHappening from "./components/whats-happening/whats-happening";
 // import Bookmarks from "./components/bookmarks/bookmarks";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Tuiter from "./components/tuiter/tuiter";
 =======
 import Tuiter from "./components/tuiter";
 >>>>>>> A3
+=======
+import Tuiter from "./components/tuiter";
+>>>>>>> A4-dislikes-feature
 
 function App() {
   return (

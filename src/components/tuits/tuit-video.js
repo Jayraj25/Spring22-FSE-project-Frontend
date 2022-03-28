@@ -1,7 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import React from "react";
 >>>>>>> A3
+=======
+import React from "react";
+>>>>>>> A4-dislikes-feature
 const TuitVideo = ({tuit}) => {
   return(
     <div
@@ -12,7 +16,7 @@ const TuitVideo = ({tuit}) => {
               frameBorder="0"
               className="position-absolute top-0 w-100 h-100"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen></iframe>
+              allowFullScreen/>
     </div>
   )
 };

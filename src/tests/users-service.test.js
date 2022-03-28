@@ -114,6 +114,7 @@ describe('findAllUsers',  () => {
 
   // setup data before test
   beforeAll(() =>
+<<<<<<< HEAD
     // insert several known users
     usernames.map(username =>
       createUser({
@@ -122,14 +123,31 @@ describe('findAllUsers',  () => {
         email: `${username}@stooges.com`
       })
     )
+=======
+      // insert several known users
+      usernames.map(username =>
+          createUser({
+            username,
+            password: `${username}123`,
+            email: `${username}@stooges.com`
+          })
+      )
+>>>>>>> A4-dislikes-feature
   );
 
   // clean up after ourselves
   afterAll(() =>
+<<<<<<< HEAD
     // delete the users we inserted
     usernames.map(username =>
       deleteUsersByUsername(username)
     )
+=======
+      // delete the users we inserted
+      usernames.map(username =>
+          deleteUsersByUsername(username)
+      )
+>>>>>>> A4-dislikes-feature
   );
 
   test('can retrieve all users from REST API', async () => {
@@ -141,7 +159,11 @@ describe('findAllUsers',  () => {
 
     // let's check each user we inserted
     const usersWeInserted = users.filter(
+<<<<<<< HEAD
       user => usernames.indexOf(user.username) >= 0);
+=======
+        user => usernames.indexOf(user.username) >= 0);
+>>>>>>> A4-dislikes-feature
 
     // compare the actual users in database with the ones we sent
     usersWeInserted.forEach(user => {

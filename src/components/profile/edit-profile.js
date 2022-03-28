@@ -1,7 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import React from "react";
 >>>>>>> A3
+=======
+import React from "react";
+>>>>>>> A4-dislikes-feature
 import {Link} from "react-router-dom";
 
 const EditProfile = () => {

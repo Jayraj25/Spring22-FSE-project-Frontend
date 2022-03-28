@@ -1,6 +1,10 @@
 import axios from "axios";
 // const BASE_URL = "https://cs5500-01-sp22.herokuapp.com/api";
+<<<<<<< HEAD
 const BASE_URL = "https://intense-retreat-47646.herokuapp.com/api";
+=======
+const BASE_URL = "http://localhost:4000/api";
+>>>>>>> A4-dislikes-feature
 
 const LOGIN_API = `${BASE_URL}/login`;
 const USERS_API = `${BASE_URL}/users`;
