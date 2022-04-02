@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import {createTuit, deleteTuit, deleteTuitByContent, findAllTuits, findTuitById} from "../services/tuits-service";
 import { createUser, deleteUsersByUsername } from "../services/users-service";
 

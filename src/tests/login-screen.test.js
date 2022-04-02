@@ -60,7 +60,8 @@ describe('fff', () => {
 
 describe('www', () => {
   beforeEach(() => {
-    axios.get.mockImplementation(() =>
+    const mock = jest.spyOn(axios, 'get');
+    mock.mockImplementation(() =>
         Promise.resolve({ data: {users: MOCKED_USERS} }));
 
     act(() => {
@@ -77,10 +78,10 @@ describe('www', () => {
     await act(async () => {
       // get all the links
       // const a = document.querySelectorAll("a#Login");
-      const a = await screen.getByText(/Login/i);
-      // console.log(a);
+      const a = await screen.getAllByText(/Login/i);
+      console.log(a);
       // click on the nth link
-      fireEvent.click(a);
+      fireEvent.click(a[a.length - 1]);
     })
 
     await waitFor(() => {

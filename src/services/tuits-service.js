@@ -33,3 +33,7 @@ export const updateTuit = (tid, tuit) =>
 export const deleteTuit = (tid) =>
     api.delete(`${TUITS_API}/${tid}`)
         .then(response => response.data);
+
+export const deleteTuitByContent = (content) =>
+    axios.delete(`${TUITS_API}/deleteByContent/${content}`,content)
+        .then(response => response.data);
