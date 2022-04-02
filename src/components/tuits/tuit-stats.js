@@ -36,11 +36,11 @@ const TuitStats = ({tuit, likeTuit = () => {},dislikeTuit = () => {}}) => {
               </span>
             </div>
             <div className="col">
-            <span onClick={() => dislikeTuit(tuit)}>
+            <span className="ttr-dislike-tuit-click" onClick={() => dislikeTuit(tuit)}>
                 {
                     isDisliked ? <i className="fa-solid fa-thumbs-down"/> : <i className="fa-regular fa-thumbs-down"/>
                 }
-                {tuit.stats.dislikes}
+                <span className="ttr-dislike-stats">{tuit.stats.dislikes}</span>
             </span>
             </div>
             <div className="col">
