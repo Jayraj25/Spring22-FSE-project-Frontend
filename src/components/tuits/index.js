@@ -6,11 +6,9 @@ import * as dislikesService from "../../services/dislikes-service";
 import * as service from "../../services/tuits-service";
 const Tuits = ({tuits = [], refreshTuits}) => {
     const likeTuit = (tuit) => {
-        likesService.userLikesTuit("me", tuit._id)
-            .then(refreshTuits)
+        likesService.userLikesTuit("me", tuit._id).then(refreshTuits)
             .catch(e => alert(e))
     }
-
     const dislikeTuit = (tuit) => {
         dislikesService.userDislikesTuit("me", tuit._id)
             .then(refreshTuits)
