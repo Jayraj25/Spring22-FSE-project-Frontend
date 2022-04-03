@@ -1,9 +1,21 @@
+/**
+ * @file renders a tuit component
+ */
 import React from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
 import {useNavigate, Link} from "react-router-dom";
 
+/**
+ * @component Tuit component renders individual tuits
+ * @param tuit - tuit object
+ * @param deleteTuit - function to delete a tuit
+ * @param likeTuit - function to like a tuit
+ * @param dislikeTuit - function to dislike a tuit
+ * @returns {JSX.Element} - tuit component
+ * @constructor Tuit
+ */
 const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
     console.log("tuit" + tuit.createdBy.username);
     const navigate = useNavigate();

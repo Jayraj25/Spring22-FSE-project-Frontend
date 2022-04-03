@@ -1,8 +1,16 @@
+/**
+ * @file renders the login form screen
+ */
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import * as service from "../../services/security-service";
 
+/**
+ * @function Login renders the login form
+ * @returns {JSX.Element} the login form
+ * @constructor Login
+ */
 export const Login = () => {
     const [loginUser, setLoginUser] = useState({});
     const navigate = useNavigate()

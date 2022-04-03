@@ -1,7 +1,18 @@
+/**
+ * @file renders the stats component of a tuit
+ */
 import React from "react";
 import {findAllTuitsLikedByUser} from "../../services/likes-service";
 import {findAllTuitsDislikedByUser} from "../../services/dislikes-service";
 
+/**
+ * @component TuitStats renders tuits statistics like likes, dislikes, retuits and replies
+ * @param tuit Tuit object
+ * @param likeTuit Function to like a tuit
+ * @param dislikeTuit Function to dislike a tuit
+ * @returns {JSX.Element} Tuit statistics
+ * @constructor TuitStats
+ */
 const TuitStats = ({tuit, likeTuit = () => {},dislikeTuit = () => {}}) => {
 
     const [isLiked, setIsLiked] = React.useState(false);

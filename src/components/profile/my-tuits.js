@@ -1,7 +1,15 @@
+/**
+ * @file renders the my-tuits component screen
+ */
 import {useEffect, useState} from "react";
 import * as service from "../../services/tuits-service";
 import Tuits from "../tuits";
 
+/**
+ * @function MyTuits
+ * @returns {JSX.Element} - my tuits component
+ * @constructor MyTuits
+ */
 const MyTuits = () => {
     const [tuits, setTuits] = useState([]);
     const findMyTuits = () =>

@@ -1,8 +1,15 @@
+/**
+ * @file renders the dislikes screen of the user profile
+ */
 import {useEffect, useState} from "react";
 import * as service from "../../services/dislikes-service";
 import Tuits from "../tuits";
 
-
+/**
+ * @function MyDislikes
+ * @returns {JSX.Element} - the dislikes screen of the user profile
+ * @constructor - MyDislikes
+ */
 const MyDislikes = () => {
     const [dislikedTuit, setDislikedTuit] = useState([]);
     const findTuitsIDislike = () =>

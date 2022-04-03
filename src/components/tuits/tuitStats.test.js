@@ -1,6 +1,9 @@
 import {act, create} from 'react-test-renderer';
 import TuitStats from "./tuit-stats";
 
+/**
+ * @function test_tuitStats_render test the tuitStats component for incrementing likes
+ */
 test('stats render correctly', () => {
     let stats = {
         likes: 123,
@@ -46,6 +49,9 @@ test('stats render correctly', () => {
     expect(likesText).toBe('124');
 });
 
+/**
+ * @function test_tuitStats_render test the tuitStats component for incrementing dislikes
+ */
 test("stats render correctly for dislikes", () => {
     let stats = {
         likes: 123,

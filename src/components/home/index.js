@@ -1,9 +1,17 @@
+/**
+ * @file renders the home page
+ */
 import React from "react";
 import Tuits from "../tuits";
 import * as service from "../../services/tuits-service";
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 
+/**
+ * @function Home
+ * @returns {JSX.Element} - the home page
+ * @constructor Home
+ */
 const Home = () => {
   const location = useLocation();
   const {uid} = useParams();

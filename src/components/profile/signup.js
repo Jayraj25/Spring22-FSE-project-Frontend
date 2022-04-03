@@ -1,7 +1,15 @@
+/**
+ * @file renders the signup form screen
+ */
 import {useState} from "react";
 import * as service from "../../services/security-service";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * @function Signup
+ * @returns {JSX.Element} - renders the signup form screen
+ * @constructor - Signup
+ */
 const Signup = () => {
     const [newUser, setNewUser] = useState({});
     const navigate = useNavigate();

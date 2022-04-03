@@ -1,3 +1,6 @@
+/**
+ * @file Gets the likes APIs for rendering in frontend
+ */
 import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
