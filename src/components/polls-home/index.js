@@ -41,7 +41,7 @@ const PollHome = () => {
                     <div className="p-2 w-100">
             <textarea
                 onChange={(e) =>
-                    setTuit(e.target.value)}
+                    setPoll(e.target.value)}
                 placeholder="What's happening?"
                 className="w-100 border-0"></textarea>
                         <div className="row">
