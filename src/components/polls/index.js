@@ -4,6 +4,7 @@
 import React from "react";
 // import './polls.css';
 import Poll from "./poll";
+import * as service from "../../services/polls-service";
 
 /**
  * @component renders the list of polls upon request.
@@ -22,16 +23,16 @@ const Polls = ({polls = [], refreshPolls}) => {
     //         .then(refreshTuits)
     //         .catch(e => alert(e))
     // }
-    // const deleteTuit = (tid) =>
-    //     service.deleteTuit(tid)
-    //         .then(refreshTuits);
+        const deletePoll = (pid) =>
+            service.deletePoll(pid)
+                .then(refreshPolls);
 
     return (
         <div>
             <ul className="ttr-tuits list-group">
                 {
                     polls.map && polls.map(poll =>
-                        <Tuit key={poll._id}
+                        <Poll key={poll._id}
                               poll={poll}/>)
                 }
             </ul>
