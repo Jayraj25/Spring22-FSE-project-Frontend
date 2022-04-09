@@ -11,7 +11,7 @@ import * as service from "../../services/polls-service";
  * @param polls the list of polls to be rendered.
  * @param refreshPolls the function to refresh the list of polls.
  * @returns {JSX.Element} the list of polls.
- * @constructor creates the list of pools.
+ * @constructor creates the list of polls.
  */
 const Polls = ({polls = [], refreshPolls}) => {
     // const likeTuit = (tuit) => {
@@ -29,7 +29,9 @@ const Polls = ({polls = [], refreshPolls}) => {
 
     return (
         <div>
+            <h1>Polls</h1>
             <ul className="ttr-tuits list-group">
+                <span>list of polls</span>
                 {
                     polls.map && polls.map(poll =>
                         <Poll key={poll._id}

@@ -18,6 +18,7 @@ import More from "../more";
 import {Login} from "../profile/login";
 import Signup from "../profile/signup";
 import TuitScreen from "../tuits/tuit-screen";
+import Polls from "../polls";
 
 /**
  * Renders the Tuiter app
@@ -41,6 +42,7 @@ function Tuiter () {
                             <Route path="/tuiter/:uid" element={<Home/>}/>
                             <Route path="/home" element={<Home/>}/>
                             <Route path="/home/:uid" element={<Home/>}/>
+                            <Route path="/polls" element={<Polls/>}/>
                             <Route path="/explore" element={<Explore/>}/>
                             <Route path="/notifications" element={<Notifications/>}/>
                             <Route path="/messages" element={<Messages/>}/>
