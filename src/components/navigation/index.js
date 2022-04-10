@@ -8,7 +8,7 @@ function Navigation() {
   const links = [
     {label: 'Tuiter', icon: 'fa-square-t', path: '/tuiter'},
     {label: 'Home', icon: 'fa-home', path: '/home'},
-    {label: 'Polls Home', icon: 'fa-poll', path: '/polls'},
+    {label: 'Polls Home', icon: 'fa-poll', path: '/polls-home'},
     {label: 'Explore', icon: 'fa-hashtag', path: '/explore'},
     {label: 'Notifications', icon: 'fa-bell', path: '/notifications'},
     {label: 'Messages', icon: 'fa-envelope', path: '/messages'},
