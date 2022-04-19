@@ -5,7 +5,12 @@ import React from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
-import {useNavigate, Link} from "react-router-dom";
+import {useNavigate, Link, Routes, Route} from "react-router-dom";
+import MyTuits from "../profile/my-tuits";
+import TuitsAndReplies from "../profile/tuits-and-replies";
+import Media from "../profile/media";
+import MyLikes from "../profile/my-likes";
+import MyDislikes from "../profile/my-dislikes";
 
 /**
  * @component Tuit component renders individual tuits
@@ -17,7 +22,7 @@ import {useNavigate, Link} from "react-router-dom";
  * @constructor Tuit
  */
 const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
-    console.log("tuit" + tuit.createdBy.username);
+    // console.log("tuit" + tuit.createdBy.username);
     const navigate = useNavigate();
     const daysOld = (tuit) => {
         const now = new Date();
@@ -72,6 +77,7 @@ const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
                 <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit}/>
             </div>
         </li>
+
     );
 }
 export default Tuit;

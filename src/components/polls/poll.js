@@ -3,7 +3,7 @@
  */
 import React from "react";
 import {useNavigate, Link} from "react-router-dom";
-import {deletePoll} from "../../services/polls-service";
+import {closePoll, createResponse, deletePoll, deleteResponse} from "../../services/polls-service";
 
 /**
  * @component Poll component renders individual polls
@@ -54,10 +54,18 @@ const Poll = ({poll}) => {
                             </div>
                             {poll.pollOptions.map((option,index) =>
                             <div key={index} className={"row justify-content-center"}>
-                                <button type="button" className="btn btn-outline-primary"
-                                        style={{width: "300px",margin:"10px"}}>{option}</button>
+                                <i onClick={() => createResponse("me", poll._id)} type="button" className="btn btn-outline-primary"
+                                        style={{width: "300px",margin:"10px"}}>{option}</i>
                             </div>
                             )}
+                            <div>
+                                <i onClick={() => deleteResponse("me", poll._id)} type="button" className="btn btn-outline-primary btn-yellow"
+                                   style={{width: "300px",margin:"10px"}}>Remove Response</i>
+                            </div>
+                            <div>
+                                <i onClick={() => closePoll("me", poll._id)} type="button" className="btn btn-outline-primary"
+                                   style={{width: "300px",margin:"10px"}}>Close Poll</i>
+                            </div>
                         </div>
                     </div>
                 </div>

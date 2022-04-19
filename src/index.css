@@ -25,3 +25,7 @@ code {
   content: "";
   padding-top: 56.25%;
 }
+
+.btn-yellow {
+  background: yellow;
+}
