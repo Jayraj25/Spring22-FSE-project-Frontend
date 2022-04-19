@@ -2,7 +2,6 @@
  * @file renders the home page for polls
  */
 import React from "react";
-import Tuits from "../tuits";
 import * as service from "../../services/polls-service";
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
@@ -17,15 +16,29 @@ import Polls from "../polls";
 const PollHome = () => {
     const location = useLocation();
     const {uid} = useParams();
-    const [question, setQuestion] = useState([{pollQuestion: ''}]);
+    const [question, setQuestion] = useState('');
     const [poll, setPoll] = useState([]);
     const [show, setShow] = useState(false);
-    const [options, setOptions] = useState([{pollOptions: []}]);
+    const [options, setOptions] = useState(['','']);
     const [allOptions, setAllOptions] = useState([]);
-    const [formFields, setFormFields] = useState([{pollQuestion: '', pollOptions: [], closed: false}]);
-    const [pollClosed, setPollClosed] = useState([{pollClosed: false}]);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const [formFields, setFormFields] = useState([{pollQuestion: '', pollOptions: [], closed: false}]);
+    const [formFields, setFormFields] = useState({});
+    const [pollClosed, setPollClosed] = useState(false);
+    const resetForm = () => {
+        setQuestion('');
+        setOptions(['','']);
+        setAllOptions([]);
+        setFormFields({});
+        setPollClosed(false);
+    };
+    const handleClose = () => {
+        setShow(false);
+        resetForm();
+    }
+    const handleShow = () => {
+        setShow(true);
+        resetForm();
+    }
     const userId = uid;
     const findPolls = () =>
         service.findAllPolls()
@@ -40,55 +53,38 @@ const PollHome = () => {
         const values = [...allOptions];
         values.push({optionX : ""});
         setAllOptions(values);
+        setOptions([...options, '']);
     };
     const removeOption = (index) => {
         const values = [...allOptions];
         values.splice(index, 1);
         setAllOptions(values);
-        // const vals = [...options.pollOptions];
-        // vals.splice(index+3, 1);
-        // setOptions(vals);
+        const vals = [...options];
+        vals.splice(index+2, 1);
+        setOptions(vals);
     };
     const submitForm = () => {
-        // const fields = [];
-        // fields.push(question);
-        // fields.push(options);
-        // fields.push(pollClosed);
         formFields.pollQuestion = question;
         formFields.pollOptions = options;
         formFields.closed = pollClosed;
-        setFormFields(formFields);
-        // console.log("The fields are: ", fields);
-        // setPoll(fields);
-        console.log(formFields.pollQuestion);
-        console.log(formFields.pollOptions);
-        console.log(formFields.closed);
-        console.log(poll);
-        // console.log("The form fields are"+JSON.stringify(formFields));
-        // console.log("The poll is: "+JSON.stringify(fields));
+        setFormFields((prevState) => ({
+            ...prevState,
+            pollQuestion: question,
+            pollOptions: options,
+            closed: pollClosed
+        }));
         service.createPoll('my', formFields)
             .then(findPolls);
+        setShow(false);
     }
 
     const handleOptions = (e) => {
         const values = [...options];
-        console.log("The values is "+e.target.getAttribute('id'));
         let index = e.target.getAttribute('id');
         index = parseInt(index.charAt(index.length - 1));
-        values[0].pollOptions[index] = e.target.value;
-        console.log("The type of values is "+typeof values);
-        console.log("The values is "+JSON.stringify(values));
+        values[index-1] = e.target.value;
         setOptions(values);
     }
-
-    const handleQuestion = (e) => {
-        const values = [...question];
-        values[0].pollQuestion = e.target.value;
-        setQuestion(values);
-    }
-
-    // console.log(question);
-    // console.log(options);
 
     return(
         <div className="ttr-home">
@@ -101,7 +97,7 @@ const PollHome = () => {
                         <div className="form-group">
                             <label htmlFor="pollQuestion">Poll Question</label>
                             <input type="text" className="form-control" id="pollQuestion" placeholder="Type here"
-                                   onChange={(e) => handleQuestion(e)}/>
+                                   onChange={(e) => setQuestion(e.target.value)}/>
                             <label htmlFor="option1">Option 1</label>
                             <input type="text" className="form-control" id="option1"
                                    placeholder="Type your first option"
@@ -148,11 +144,6 @@ const PollHome = () => {
                              src={`../images/nasa-logo.jpg`} alt=""/>
                     </div>
                     <div className="p-2 w-100">
-            {/*<textarea*/}
-            {/*    onChange={(e) =>*/}
-            {/*        setPoll(e.target.value)}*/}
-            {/*    placeholder="What's happening?"*/}
-            {/*    className="w-100 border-0"></textarea>*/}
                         <div className="row">
                             <div className="col-10 ttr-font-size-150pc text-primary">
                                 <i className="fas fa-portrait me-3"/>
