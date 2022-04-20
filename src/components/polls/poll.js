@@ -11,7 +11,7 @@ import {deletePoll} from "../../services/polls-service";
  * @constructor poll
  */
 const Poll = ({poll}) => {
-    console.log("poll" + poll.createdBy.username);
+    // console.log(poll);
     const navigate = useNavigate();
     const daysOld = (tuit) => {
         const now = new Date();
@@ -36,27 +36,32 @@ const Poll = ({poll}) => {
         return old;
     }
     return(
-        // <li onClick={() => navigate(`/tuit/${tuit._id}`)}
-        <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
-            <div className="pe-2">
-                {
-                    poll.createdBy &&
-                    <img src={`../images/${poll.createdBy.username}.jpg`}
-                         className="ttr-tuit-avatar-logo rounded-circle" alt=""/>
-                }
+            <div className="container">
+                <div className="card-group">
+                    <div className="col">
+                        <div className="card shadow" style={{margin: "10px"}}>
+                            <div className="row">
+                                <div className="col-md-3" style={{margin:"20px"}}>
+                                    <img src={""} alt='black' width='20' height='20'/>
+                                    <Link to={`/polls/${poll._id}`}>{poll.createdBy}</Link>
+                                </div>
+                                <div className="col-md-4" style={{margin:"20px"}}>
+                                    {poll.pollQuestion}
+                                </div>
+                                <div className="col-md-2" style={{margin:"20px"}}>
+                                    <i onClick={() => deletePoll(poll.createdBy, poll._id)} className="fas fa-remove fa-2x fa-pull-right"/>
+                                </div>
+                            </div>
+                            {poll.pollOptions.map((option,index) =>
+                            <div key={index} className={"row justify-content-center"}>
+                                <button type="button" className="btn btn-outline-primary"
+                                        style={{width: "300px",margin:"10px"}}>{option}</button>
+                            </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="w-100">
-                <i onClick={() => deletePoll(poll.createdBy, poll._id)} className="fas fa-remove fa-2x fa-pull-right"/>
-                <Link to={`/poll/${poll._id}`}>
-                    <i className="float-end fas fa-circle-ellipsis me-1"/>
-                </Link>
-                <h2
-                    className="fs-5">
-                    {poll.createdBy.username}@{poll.createdBy.username} -
-                    <span className="ms-1">{daysOld(poll)}</span></h2>
-                {poll.poll}
-            </div>
-        </li>
     );
 }
 export default Poll;
