@@ -1,22 +1,27 @@
 /**
  * @file renders a poll component
  */
-import React from "react";
+import React, {useState} from "react";
 import {useNavigate, Link} from "react-router-dom";
-import {closePoll, createResponse, deletePoll, deleteResponse} from "../../services/polls-service";
+import {closePoll, createResponse, deletePoll, deleteResponse, findAllPolls} from "../../services/polls-service";
+import * as service from "../../services/polls-service";
 
 /**
  * @component Poll component renders individual polls
  * @returns {JSX.Element} - poll component
  * @constructor poll
  */
-const Poll = ({poll}) => {
+const Poll = ({poll, deletePoll}) => {
     // console.log(poll);
     const navigate = useNavigate();
-    const daysOld = (tuit) => {
+    const [response, setResponse] = useState(0);
+    const createResponse = () =>
+        service.createResponse('my', poll._id, {response})
+            .then(findAllPolls)
+    const daysOld = (poll) => {
         const now = new Date();
         const nowMillis = now.getTime();
-        const posted = new Date(tuit.postedOn);
+        const posted = new Date(poll.postedOn);
         const postedMillis = posted.getTime();
         const oldMillis = nowMillis - postedMillis;
         let old = 0.0;
@@ -49,21 +54,30 @@ const Poll = ({poll}) => {
                                     {poll.pollQuestion}
                                 </div>
                                 <div className="col-md-2" style={{margin:"20px"}}>
-                                    <i onClick={() => deletePoll(poll.createdBy.username, poll._id)} className="fas fa-remove fa-2x fa-pull-right"/>
+                                    <i onClick={() => deletePoll("my", poll._id)} className="fas fa-remove fa-2x fa-pull-right"/>
                                 </div>
                             </div>
                             {poll.pollOptions.map((option,index) =>
                             <div key={index} className={"row justify-content-center"}>
-                                <i onClick={() => createResponse("me", poll._id)} type="button" className="btn btn-outline-primary"
-                                   style={{width: "300px",margin:"10px"}}>{option}</i>
+                                <button  value={index} onClick={() => setResponse(index)} type="button" className="btn btn-outline-primary"
+                                   style={{width: "300px",margin:"10px"}}>{option}</button>
+                                {/*<button  value={index} onClick={() => createResponse("my", poll._id)} type="button" className="btn btn-outline-primary"*/}
+                                {/*         style={{width: "300px",margin:"10px"}}>{option}</button>*/}
                             </div>
                             )}
+                            <div >
+                                <a onClick={createResponse}
+                                   className={`btn btn-primary rounded-pill fa-pull-right
+                                fw-bold ps-4 pe-4`}>
+                                    submit response
+                                </a>
+                            </div>
                             <div>
-                                <i onClick={() => deleteResponse("me", poll._id)} type="button" className="btn btn-outline-primary btn-yellow"
+                                <i onClick={() => deleteResponse("my", poll._id)} type="button" className="btn btn-outline-primary btn-yellow"
                                    style={{width: "300px",margin:"10px"}}>Remove Response</i>
                             </div>
                             <div>
-                                <i onClick={() => closePoll("me", poll._id)} type="button" className="btn btn-outline-primary"
+                                <i onClick={() => closePoll("my", poll._id)} type="button" className="btn btn-outline-primary"
                                    style={{width: "300px",margin:"10px"}}>Close Poll</i>
                             </div>
                         </div>
