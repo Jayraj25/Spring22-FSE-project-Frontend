@@ -42,14 +42,21 @@ const Poll = ({poll}) => {
                         <div className="card shadow" style={{margin: "10px"}}>
                             <div className="row">
                                 <div className="col-md-3" style={{margin:"20px"}}>
-                                    <img src={""} alt='black' width='20' height='20'/>
-                                    <Link to={`/polls/${poll._id}`}>{poll.createdBy.username}</Link>
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                        <img src={`../images/${poll.createdBy.username}.jpg`} alt='black' width='50' height='50'/>
+                                        </div>
+                                        <div className="col-md-12">
+                                            <h5><Link to={`/profile/my-tuits`}>{poll.createdBy.username}</Link></h5>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="col-md-4" style={{margin:"20px"}}>
                                     {poll.pollQuestion}
                                 </div>
                                 <div className="col-md-2" style={{margin:"20px"}}>
-                                    <i onClick={() => deletePoll(poll.createdBy.username, poll._id)} className="fas fa-remove fa-2x fa-pull-right"/>
+                                    <i onClick={() => deletePoll(poll.createdBy.username, poll._id)}
+                                       className="fas fa-remove fa-2x fa-pull-right"/>
                                 </div>
                             </div>
                             {poll.pollOptions.map((option,index) =>
