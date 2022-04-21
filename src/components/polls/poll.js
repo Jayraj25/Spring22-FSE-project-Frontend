@@ -15,12 +15,18 @@ const Poll = ({poll, deletePoll}) => {
     // console.log(poll);
     const navigate = useNavigate();
     const [response, setResponse] = useState(0);
+    const [responseName, setResponseName] = useState("no response");
+    const [recordedResponse, setRecordedResponse] = useState("no response");
     const [closed, setClosed] = useState('close poll');
+    const recordResponse = () =>
+        setRecordedResponse(responseName)
     const createResponse = () =>
         service.createResponse('my', poll._id, {chosenOption: response})
-            .then(findAllPolls)
+            .then(findAllPolls).then(recordResponse)
+    const noResponse = () =>
+        setRecordedResponse("no response")
     const deleteResponse = () =>
-        service.deleteResponse('my', poll._id)
+        service.deleteResponse('my', poll._id).then(noResponse)
     const pollClosed = () =>
         setClosed('poll is closed')
     const closePoll = () =>
@@ -65,9 +71,12 @@ const Poll = ({poll, deletePoll}) => {
                                     <i onClick={() => deletePoll('my', poll._id)} className="fas fa-remove fa-2x fa-pull-right"/>
                                 </div>
                             </div>
+                            <div style={{margin: "10px"}}>
+                               your current response: {recordedResponse}
+                            </div>
                             {poll.pollOptions.map((option,index) =>
                             <div key={index} className={"row justify-content-center"}>
-                                <button  value={index} onClick={() => setResponse(index)} type="button" className="btn btn-outline-primary"
+                                <button  value={index} onClick={() => {setResponse(index); setResponseName(option)}} type="button" className="btn btn-outline-primary"
                                    style={{width: "300px",margin:"10px"}}>{option}</button>
                                 {/*<button  value={index} onClick={() => createResponse("my", poll._id)} type="button" className="btn btn-outline-primary"*/}
                                 {/*         style={{width: "300px",margin:"10px"}}>{option}</button>*/}
