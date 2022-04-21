@@ -11,13 +11,17 @@ import * as service from "../../services/polls-service";
  * @returns {JSX.Element} - poll component
  * @constructor poll
  */
-const Poll = ({poll, deletePoll}) => {
+const Poll = ({poll}) => {
     // console.log(poll);
     const navigate = useNavigate();
     const [response, setResponse] = useState(0);
     const createResponse = () =>
-        service.createResponse('my', poll._id, {response})
+        service.createResponse('my', poll._id, {chosenOption: response})
             .then(findAllPolls)
+    const deleteResponse = () =>
+        service.deleteResponse('my', poll._id)
+    const closePoll = () =>
+        service.closePoll('my', poll._id)
     const daysOld = (poll) => {
         const now = new Date();
         const nowMillis = now.getTime();
@@ -54,7 +58,7 @@ const Poll = ({poll, deletePoll}) => {
                                     {poll.pollQuestion}
                                 </div>
                                 <div className="col-md-2" style={{margin:"20px"}}>
-                                    <i onClick={() => deletePoll("my", poll._id)} className="fas fa-remove fa-2x fa-pull-right"/>
+                                    <i onClick={() => deletePoll('my', poll._id)} className="fas fa-remove fa-2x fa-pull-right"/>
                                 </div>
                             </div>
                             {poll.pollOptions.map((option,index) =>
@@ -65,6 +69,7 @@ const Poll = ({poll, deletePoll}) => {
                                 {/*         style={{width: "300px",margin:"10px"}}>{option}</button>*/}
                             </div>
                             )}
+                            <div className="row">
                             <div >
                                 <a onClick={createResponse}
                                    className={`btn btn-primary rounded-pill fa-pull-right
@@ -73,12 +78,13 @@ const Poll = ({poll, deletePoll}) => {
                                 </a>
                             </div>
                             <div>
-                                <i onClick={() => deleteResponse("my", poll._id)} type="button" className="btn btn-outline-primary btn-yellow"
-                                   style={{width: "300px",margin:"10px"}}>Remove Response</i>
+                                <a onClick={deleteResponse}  className="btn btn-outline-primary btn-yellow"
+                                   style={{margin:"10px"}}>Remove Response</a>
                             </div>
                             <div>
-                                <i onClick={() => closePoll("my", poll._id)} type="button" className="btn btn-outline-primary"
-                                   style={{width: "300px",margin:"10px"}}>Close Poll</i>
+                                <a onClick={closePoll} tabindex="1" className="btn btn-outline-primary"
+                                   style={{margin:"10px", background: "purple"}}>Close Poll</a>
+                            </div>
                             </div>
                         </div>
                     </div>
