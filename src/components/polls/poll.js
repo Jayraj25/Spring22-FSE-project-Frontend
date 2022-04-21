@@ -11,17 +11,21 @@ import * as service from "../../services/polls-service";
  * @returns {JSX.Element} - poll component
  * @constructor poll
  */
-const Poll = ({poll}) => {
+const Poll = ({poll, deletePoll}) => {
     // console.log(poll);
     const navigate = useNavigate();
     const [response, setResponse] = useState(0);
+    const [closed, setClosed] = useState('close poll');
     const createResponse = () =>
         service.createResponse('my', poll._id, {chosenOption: response})
             .then(findAllPolls)
     const deleteResponse = () =>
         service.deleteResponse('my', poll._id)
+    const pollClosed = () =>
+        setClosed('poll is closed')
     const closePoll = () =>
-        service.closePoll('my', poll._id)
+        service.closePoll('my', poll._id).then(pollClosed)
+
     const daysOld = (poll) => {
         const now = new Date();
         const nowMillis = now.getTime();
@@ -70,21 +74,23 @@ const Poll = ({poll}) => {
                             </div>
                             )}
                             <div className="row">
-                            <div >
-                                <a onClick={createResponse}
-                                   className={`btn btn-primary rounded-pill fa-pull-right
-                                fw-bold ps-4 pe-4`}>
+                                <div className="col-md-4">
+                                    <a onClick={closePoll} tabIndex="1" className="btn btn-outline-primary "
+                                       style={{ margin: "10px", marginTop: "33px",background: "#DB7093"}}>{closed}</a>
+                                </div>
+                                <div className="col-md-4">
+                                    <a onClick={deleteResponse}  className="btn btn-outline-primary"
+                                       style={{margin:"10px", background: "#FFD700"}}>Remove Response</a>
+                                </div>
+                            <div className="col-md-4">
+                                <a  style={{margin:"10px"}} onClick={createResponse}
+                                   className={`btn btn-primary rounded-pill
+                                fw-bold ps-4 pe-4 fa-pull-right`}>
                                     submit response
                                 </a>
                             </div>
-                            <div>
-                                <a onClick={deleteResponse}  className="btn btn-outline-primary btn-yellow"
-                                   style={{margin:"10px"}}>Remove Response</a>
-                            </div>
-                            <div>
-                                <a onClick={closePoll} tabindex="1" className="btn btn-outline-primary"
-                                   style={{margin:"10px", background: "purple"}}>Close Poll</a>
-                            </div>
+
+
                             </div>
                         </div>
                     </div>
