@@ -4,6 +4,7 @@
 import React from "react";
 import Poll from "./poll";
 import * as service from "../../services/polls-service";
+import {findAllPolls} from "../../services/polls-service";
 
 /**
  * @component renders the list of polls upon request.
@@ -25,6 +26,8 @@ const Polls = ({polls = [], refreshPolls}) => {
         const deletePoll = (uid,pid) =>
             service.deletePoll(uid,pid)
                 .then(refreshPolls);
+    const closePoll = (uid,pid) =>
+        service.closePoll(uid,pid).then(refreshPolls);
 
     return (
         <div>
@@ -33,7 +36,7 @@ const Polls = ({polls = [], refreshPolls}) => {
                 <span>list of polls</span>
                 {
                     polls.map && polls.map(poll => <Poll key={poll._id} poll={poll}
-                    deletePoll={deletePoll}/>)
+                    deletePoll={deletePoll} closePoll={closePoll}/>)
                 }
             </ul>
         </div>

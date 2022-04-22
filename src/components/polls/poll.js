@@ -11,13 +11,14 @@ import * as service from "../../services/polls-service";
  * @returns {JSX.Element} - poll component
  * @constructor poll
  */
-const Poll = ({poll, deletePoll}) => {
+const Poll = ({poll, deletePoll, closePoll}) => {
     // console.log(poll);
     const navigate = useNavigate();
     const [response, setResponse] = useState(0);
     const [responseName, setResponseName] = useState("no response");
     const [recordedResponse, setRecordedResponse] = useState("no response");
     const [closed, setClosed] = useState('close poll');
+    const [isClosed, setIsClosed] = useState(poll.closed);
     const recordResponse = () =>
         setRecordedResponse(responseName)
     const createResponse = () =>
@@ -29,8 +30,10 @@ const Poll = ({poll, deletePoll}) => {
         service.deleteResponse('my', poll._id).then(noResponse)
     const pollClosed = () =>
         setClosed('poll is closed')
-    const closePoll = () =>
-        service.closePoll('my', poll._id).then(pollClosed)
+    const isPollClosed = () =>
+        setIsClosed(poll.closed).then(findAllPolls)
+    // isPollClosed();
+
 
     const daysOld = (poll) => {
         const now = new Date();
@@ -84,19 +87,31 @@ const Poll = ({poll, deletePoll}) => {
                             )}
                             <div className="row">
                                 <div className="col-md-4">
-                                    <a onClick={closePoll} tabIndex="1" className="btn btn-outline-primary "
-                                       style={{ margin: "10px", marginTop: "33px",background: "#DB7093"}}>{closed}</a>
+                                    {
+                                        isClosed ? <a  className="btn "
+                                                      style={{ margin: "10px", marginTop: "33px",background: "grey"}}>poll is closed</a> : <a onClick={() => closePoll('my', poll._id).then(setIsClosed(true))} tabIndex="1" className="btn btn-outline-primary "
+                                               style={{ margin: "10px", marginTop: "33px",background: "#DB7093"}}>close poll</a>
+                                    }
                                 </div>
                                 <div className="col-md-4">
-                                    <a onClick={deleteResponse}  className="btn btn-outline-primary"
-                                       style={{margin:"10px", background: "#FFD700"}}>Remove Response</a>
+                                    {
+                                        isClosed ? <a  className="btn"
+                                                      style={{margin:"10px", marginTop: "33px", background: "grey"}}>Cannot Remove</a> : <a onClick={deleteResponse}  className="btn btn-outline-primary"
+                                                                                                                                               style={{margin:"10px", background: "#FFD700"}}>Remove Response</a>
+                                    }
                                 </div>
                             <div className="col-md-4">
-                                <a  style={{margin:"10px"}} onClick={createResponse}
-                                   className={`btn btn-primary rounded-pill
+                                {
+                                    isClosed ? <a  style={{margin:"10px", background: "grey"}}
+                                                   className={`btn rounded-pill
                                 fw-bold ps-4 pe-4 fa-pull-right`}>
-                                    submit response
-                                </a>
+                                        cannot submit
+                                    </a> : <a  style={{margin:"10px"}} onClick={createResponse}
+                                                                                                                                            className={`btn btn-primary rounded-pill
+                                fw-bold ps-4 pe-4 fa-pull-right`}>
+                                        submit response
+                                    </a>
+                                }
                             </div>
 
 
