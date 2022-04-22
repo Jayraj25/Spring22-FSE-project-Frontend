@@ -29,7 +29,7 @@ export const deletePoll = (uid, pid) =>
         .then(response => response.data);
 
 export const createResponse = (uid, pid, pollResponse) =>
-    api.post(`${BASE_URL}/api/user/${uid}/response/polls/${pid}`, pollResponse)
+    api.put(`${USERS_API}/${uid}/poll/${pid}/response`, pollResponse)
         .then(response => response.data);
 
 export const deleteResponse = (uid, pid) =>
