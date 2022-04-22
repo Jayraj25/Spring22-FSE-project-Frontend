@@ -27,3 +27,7 @@ export const createPoll = (uid, poll) =>
 export const deletePoll = (uid, pid) =>
     api.delete(`${USERS_API}/${uid}/deletepoll/${POLLS_API}/${pid}`)
         .then(response => response.data);
+
+export const findAllPollsResponseById = (pid) =>
+    api.get(`${BASE_URL}/api/responses/polls/${pid}`)
+        .then(response => response.data);
