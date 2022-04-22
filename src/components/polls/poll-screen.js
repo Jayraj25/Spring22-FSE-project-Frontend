@@ -1,7 +1,7 @@
 /**
  * @file renders the poll screen component
  */
-import {useEffect, useLayoutEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Poll from "./poll";
 import * as service from "../../services/polls-service";
@@ -14,9 +14,7 @@ import * as service from "../../services/polls-service";
 const PollScreen = () => {
     const [poll, setPoll] = useState({});
     const {pid} = useParams();
-    console.log(pid);
     const findPollById = () => {
-        console.log("findPollById function called");
         service.findPollById(pid)
             .then(poll => {
                 console.log(poll);
@@ -26,16 +24,17 @@ const PollScreen = () => {
                 console.log(err);
             });
     }
+
     useEffect(() => {
-        console.log("useEffect called");
+        let isMounted = true;
         findPollById();
+        return () => {isMounted = false;}
     }, []);
-    console.log(poll);
-    return(
-        <div>
-            <h1>Poll Screen</h1>
-            <Poll poll={poll}/>
-        </div>
-    );
+        return (
+            <div>
+                <h1>Poll Screen</h1>
+                <Poll poll={poll}/>
+            </div>
+        );
 };
 export default PollScreen;

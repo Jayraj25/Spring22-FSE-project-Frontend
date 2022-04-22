@@ -39,3 +39,7 @@ export const deleteResponse = (uid, pid) =>
 export const closePoll = (uid, pid, poll) =>
     api.put(`${USERS_API}/${uid}/close/polls/${pid}`, poll)
         .then(response => response.data);
+
+export const findAllPollsResponseById = (pid) =>
+    api.get(`${BASE_URL}/api/responses/polls/${pid}`)
+        .then(response => response.data);
