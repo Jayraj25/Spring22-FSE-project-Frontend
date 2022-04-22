@@ -44,3 +44,7 @@ body {
 .ttr-z-index-1 {
     z-index: 1;
 }
+a[tabindex]:focus {
+    color:blue;
+    outline: none;
+}

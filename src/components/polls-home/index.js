@@ -24,6 +24,7 @@ const PollHome = () => {
     // const [formFields, setFormFields] = useState([{pollQuestion: '', pollOptions: [], closed: false}]);
     const [formFields, setFormFields] = useState({});
     const [pollClosed, setPollClosed] = useState(false);
+
     const resetForm = () => {
         setQuestion('');
         setOptions(['','']);
