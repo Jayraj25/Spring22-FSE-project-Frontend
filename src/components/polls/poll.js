@@ -3,10 +3,8 @@
  */
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {deletePoll} from "../../services/polls-service";
 import {Modal} from "react-bootstrap";
 import {CanvasJSChart} from "canvasjs-react-charts";
-import {useNavigate, Link} from "react-router-dom";
 import {closePoll, createResponse, deletePoll, deleteResponse, findAllPolls} from "../../services/polls-service";
 import * as service from "../../services/polls-service";
 
@@ -16,8 +14,6 @@ import * as service from "../../services/polls-service";
  * @constructor poll
  */   
 const Poll = ({poll, deletePoll}) => {
-    // console.log(poll);
-    const navigate = useNavigate();
     const [response, setResponse] = useState(0);
     const [responseName, setResponseName] = useState("no response");
     const [recordedResponse, setRecordedResponse] = useState("no response");
@@ -156,8 +152,8 @@ const Poll = ({poll, deletePoll}) => {
                             </div>
                             {poll.pollOptions.map((option,index) =>
                                 <div key={index} className={"row justify-content-center"}>
-                                    <button type="button" className="btn btn-outline-primary"
-                                            style={{width: "300px",margin:"10px"}}>{option}</button>
+                                    <button  value={index} onClick={() => {setResponse(index); setResponseName(option)}} type="button" className="btn btn-outline-primary"
+                                             style={{width: "300px",margin:"10px"}}>{option}</button>
                                 </div>
                             )}
                             <div className="d-grid gap-2 d-md-block">
@@ -166,13 +162,13 @@ const Poll = ({poll, deletePoll}) => {
                                         className="btn btn-warning float-end">
                                     <i className="fas fa-chart-pie fa-2x"
                                        style={{marginLeft:"10px",marginRight:"10px"}}/>See Details</button>
-                            <div key={index} className={"row justify-content-center"}>
-                                <button  value={index} onClick={() => {setResponse(index); setResponseName(option)}} type="button" className="btn btn-outline-primary"
-                                   style={{width: "300px",margin:"10px"}}>{option}</button>
+                            </div>
+                            {/*<div key={index} className={"row justify-content-center"}>*/}
+                            {/*    <button  value={index} onClick={() => {setResponse(index); setResponseName(option)}} type="button" className="btn btn-outline-primary"*/}
+                            {/*       style={{width: "300px",margin:"10px"}}>{option}</button>*/}
                                 {/*<button  value={index} onClick={() => createResponse("my", poll._id)} type="button" className="btn btn-outline-primary"*/}
                                 {/*         style={{width: "300px",margin:"10px"}}>{option}</button>*/}
-                            </div>
-                            )}
+                            {/*</div>*/}
                             <div className="row">
                                 <div className="col-md-4">
                                     <a onClick={closePoll} tabIndex="1" className="btn btn-outline-primary "
