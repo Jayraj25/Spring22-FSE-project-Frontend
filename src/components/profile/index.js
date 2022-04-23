@@ -9,6 +9,7 @@ import TuitsAndReplies from "./tuits-and-replies";
 import Media from "./media";
 import MyLikes from "./my-likes";
 import MyDislikes from "./my-dislikes";
+import MyPollResponses from "./my-pollResponses";
 
 /**
  * @returns {JSX.Element} the profile component
@@ -101,6 +102,11 @@ const Profile = () => {
                                   className={`nav-link ${location.pathname.indexOf('media') >= 0 ? 'active':''}`}>
                                 Media</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link to="/profile/my-pollResponses"
+                                  className={`nav-link ${location.pathname.indexOf('my-pollResponses') >= 0 ? 'active':''}`}>
+                                Response Poll</Link>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -110,6 +116,7 @@ const Profile = () => {
                 <Route path="/media" element={<Media/>}/>
                 <Route path="/mylikes" element={<MyLikes/>}/>
                 <Route path="/dislikes" element={<MyDislikes/>}/>
+                <Route path="/my-pollResponses" element={<MyPollResponses/>}/>
             </Routes>
         </div>
     );

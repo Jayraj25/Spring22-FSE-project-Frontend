@@ -18,10 +18,10 @@ export const findPollResponsesByUser = (uid) =>
         .then(response => response.data);
 
 export const findPollResponseByPollId = (pid) =>
-    api.get(`${POLLS_API}/${pid}`)
+    api.get(`${API}/responses/polls/${pid}`)
         .then(response => response.data);
 
-export const findAllUsersReplyPollResponse = (pid) =>
+export const findAllUsersReplyByPollId = (pid) =>
     api.get(`${API}/usersrepsonded/polls/${pid}`)
         .then(response => response.data);
 
