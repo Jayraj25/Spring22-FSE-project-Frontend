@@ -29,6 +29,7 @@ const Polls = ({polls = [], refreshPolls}) => {
     const closePoll = (uid,pid) =>
         service.closePoll(uid,pid).then(refreshPolls);
 
+
     return (
         <div>
             <h1>Polls</h1>

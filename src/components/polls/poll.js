@@ -3,8 +3,16 @@
  */
 import React, {useState} from "react";
 import {useNavigate, Link} from "react-router-dom";
-import {closePoll, createResponse, deletePoll, deleteResponse, findAllPolls} from "../../services/polls-service";
+import {
+    closePoll,
+    createResponse,
+    deletePoll,
+    deleteResponse,
+    findAllPolls,
+    findPollResponseByPollIdByUserId
+} from "../../services/polls-service";
 import * as service from "../../services/polls-service";
+import {findAllTuitsLikedByUser} from "../../services/likes-service";
 
 /**
  * @component Poll component renders individual polls
@@ -16,11 +24,17 @@ const Poll = ({poll, deletePoll, closePoll}) => {
     const navigate = useNavigate();
     const [response, setResponse] = useState(0);
     const [responseName, setResponseName] = useState("no response");
+    const [isChosen, setIsChosen] = useState(false);
+    // const checkChosen = () => {
+    //    const response = findPollResponseByPollIdByUserId('my', poll._id);
+    //    setResponse(response.poll)
+    // }
     const [recordedResponse, setRecordedResponse] = useState("no response");
     const [closed, setClosed] = useState('close poll');
     const [isClosed, setIsClosed] = useState(poll.closed);
     const recordResponse = () =>
         setRecordedResponse(responseName)
+    // console.log(findPollResponseByPollIdByUserId('my',poll._id));
     const createResponse = () =>
         service.createResponse('my', poll._id, {chosenOption: response})
             .then(findAllPolls).then(recordResponse)
@@ -33,7 +47,6 @@ const Poll = ({poll, deletePoll, closePoll}) => {
     const isPollClosed = () =>
         setIsClosed(poll.closed).then(findAllPolls)
     // isPollClosed();
-
 
     const daysOld = (poll) => {
         const now = new Date();
@@ -79,10 +92,23 @@ const Poll = ({poll, deletePoll, closePoll}) => {
                             </div>
                             {poll.pollOptions.map((option,index) =>
                             <div key={index} className={"row justify-content-center"}>
-                                <button  value={index} onClick={() => {setResponse(index); setResponseName(option)}} type="button" className="btn btn-outline-primary"
-                                   style={{width: "300px",margin:"10px"}}>{option}</button>
-                                {/*<button  value={index} onClick={() => createResponse("my", poll._id)} type="button" className="btn btn-outline-primary"*/}
-                                {/*         style={{width: "300px",margin:"10px"}}>{option}</button>*/}
+
+                                {
+                                    isChosen ? <button value={index} onClick={() => {
+                                            setResponse(index);
+                                            setResponseName(option)
+                                        }} type="button" className="btn btn-outline-primary"
+                                                       style={{
+                                                           width: "300px",
+                                                           margin: "10px",
+                                                           background: "blue"
+                                                       }}>{option}</button> :
+                                        <button value={index} onClick={() => {
+                                            setResponse(index);
+                                            setResponseName(option)
+                                        }} type="button" className="btn btn-outline-primary"
+                                                style={{width: "300px", margin: "10px"}}>{option}</button>
+                                }
                             </div>
                             )}
                             <div className="row">
