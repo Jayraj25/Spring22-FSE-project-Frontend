@@ -19,6 +19,8 @@ const Poll = ({poll, deletePoll}) => {
     const [recordedResponse, setRecordedResponse] = useState("no response");
     const [closed, setClosed] = useState('close poll');
     const [show, setShow] = useState(false);
+    const [isClosed, setIsClosed] = useState(poll.closed);
+
     const [pieData, setPieData] = useState([]);
 
     const handleShow = () => {
@@ -40,6 +42,8 @@ const Poll = ({poll, deletePoll}) => {
         setClosed('poll is closed')
     const closePoll = () =>
         service.closePoll('my', poll._id).then(pollClosed)
+    const isPollClosed = () =>
+        setIsClosed(poll.closed).then(findAllPolls)
 
     useEffect(() => {
         const calculateVotes = () => {
@@ -156,35 +160,49 @@ const Poll = ({poll, deletePoll}) => {
                                              style={{width: "300px",margin:"10px"}}>{option}</button>
                                 </div>
                             )}
-                            <div className="d-grid gap-2 d-md-block">
-                                <button type="button" style={{margin:"10px"}}
-                                        onClick={handleShow}
-                                        className="btn btn-warning float-end">
-                                    <i className="fas fa-chart-pie fa-2x"
-                                       style={{marginLeft:"10px",marginRight:"10px"}}/>See Details</button>
-                            </div>
+
                             {/*<div key={index} className={"row justify-content-center"}>*/}
                             {/*    <button  value={index} onClick={() => {setResponse(index); setResponseName(option)}} type="button" className="btn btn-outline-primary"*/}
                             {/*       style={{width: "300px",margin:"10px"}}>{option}</button>*/}
                                 {/*<button  value={index} onClick={() => createResponse("my", poll._id)} type="button" className="btn btn-outline-primary"*/}
                                 {/*         style={{width: "300px",margin:"10px"}}>{option}</button>*/}
                             {/*</div>*/}
-                            <div className="row">
-                                <div className="col-md-4">
-                                    <a onClick={closePoll} tabIndex="1" className="btn btn-outline-primary "
-                                       style={{ margin: "10px", marginTop: "33px",background: "#DB7093"}}>{closed}</a>
+                            <div className="row" style={{alignItems: "end" }}>
+                                <div className="col-md">
+                                    {
+                                        isClosed ? <a  className="btn "
+                                                       style={{ margin: "10px", marginTop: "33px",background: "grey"}}>poll closed</a> : <a onClick={() => closePoll('my', poll._id).then(setIsClosed(true))} tabIndex="1" className="btn btn-outline-primary "
+                                                                                                                                               style={{ margin: "10px", marginTop: "33px",background: "#DB7093"}}>close poll</a>
+                                    }
                                 </div>
-                                <div className="col-md-4">
-                                    <a onClick={deleteResponse}  className="btn btn-outline-primary"
-                                       style={{margin:"10px", background: "#FFD700"}}>Remove Response</a>
+                                <div className="col-md">
+                                    {
+                                        isClosed ? <a  className="btn"
+                                                       style={{margin:"10px", marginTop: "33px", background: "grey"}}>Can't Remove</a> : <a onClick={deleteResponse}  className="btn btn-outline-primary"
+                                                                                                                                             style={{margin:"10px", background: "#FFD700"}}>Remove Response</a>
+                                    }
                                 </div>
-                            <div className="col-md-4">
-                                <a  style={{margin:"10px"}} onClick={createResponse}
-                                   className={`btn btn-primary rounded-pill
+                                <div className="d-grid gap-2 d-md-block col-md" >
+                                    <button type="button" style={{margin:"10px"}}
+                                            onClick={handleShow}
+                                            className="btn btn-warning float-end">
+                                        <i className="fas fa-chart-pie fa-2x"
+                                           style={{marginLeft:"10px",marginRight:"10px"}}/>See Details</button>
+                                </div>
+                            <div className="col-md">
+                                {
+                                    isClosed ? <a  style={{margin:"10px", background: "grey"}}
+                                                   className={`btn rounded-pill
                                 fw-bold ps-4 pe-4 fa-pull-right`}>
-                                    submit response
-                                </a>
+                                        cannot submit
+                                    </a> : <a  style={{margin:"10px"}} onClick={createResponse}
+                                               className={`btn btn-primary rounded-pill
+                                fw-bold ps-4 pe-4 fa-pull-right`}>
+                                        submit response
+                                    </a>
+                                }
                             </div>
+
                             </div>
                         </div>
                     </div>
