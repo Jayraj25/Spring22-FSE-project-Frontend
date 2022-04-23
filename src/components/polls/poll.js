@@ -1,7 +1,7 @@
 /**
  * @file renders a poll component
  */
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate, Link} from "react-router-dom";
 import {
     closePoll,
@@ -23,12 +23,17 @@ const Poll = ({poll, deletePoll, closePoll}) => {
     // console.log(poll);
     const navigate = useNavigate();
     const [response, setResponse] = useState(0);
-    const [responseName, setResponseName] = useState("no response");
+    const [responseName, setResponseName] = useState(0);
     const [isChosen, setIsChosen] = useState(false);
-    // const checkChosen = () => {
-    //    const response = findPollResponseByPollIdByUserId('my', poll._id);
-    //    setResponse(response.poll)
-    // }
+
+     useEffect(() => {
+         const checkChosen = () => {
+             service.findPollResponseByPollIdByUserId('my', poll._id).then(pollResponse => console.log(pollResponse));
+             console.log(responseName);
+             // console.log(JSON.stringify(pollResponse));
+             // setResponseName(pollResponse.pollId);
+         }
+         checkChosen()}, [])
     const [recordedResponse, setRecordedResponse] = useState("no response");
     const [closed, setClosed] = useState('close poll');
     const [isClosed, setIsClosed] = useState(poll.closed);
