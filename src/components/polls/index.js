@@ -12,7 +12,7 @@ import * as service from "../../services/polls-service";
  * @returns {JSX.Element} the list of polls.
  * @constructor creates the list of polls.
  */
-const Polls = ({polls, refreshPolls}) => {
+const Polls = ({polls = [], refreshPolls}) => {
     // const likeTuit = (tuit) => {
     //     likesService.userLikesTuit("me", tuit._id).then(refreshTuits)
     //         .catch(e => alert(e))
@@ -22,8 +22,8 @@ const Polls = ({polls, refreshPolls}) => {
     //         .then(refreshTuits)
     //         .catch(e => alert(e))
     // }
-        const deletePoll = (pid) =>
-            service.deletePoll(pid)
+        const deletePoll = (uid,pid) =>
+            service.deletePoll(uid,pid)
                 .then(refreshPolls);
 
     return (
@@ -32,7 +32,8 @@ const Polls = ({polls, refreshPolls}) => {
             <ul className="ttr-tuits list-group">
                 <span>list of polls</span>
                 {
-                    polls.map && polls.map(poll => <Poll key={poll._id} poll={poll}/>)
+                    polls.map && polls.map(poll => <Poll key={poll._id} poll={poll}
+                    deletePoll={deletePoll}/>)
                 }
             </ul>
         </div>

@@ -25,5 +25,21 @@ export const createPoll = (uid, poll) =>
         .then(response => response.data);
 
 export const deletePoll = (uid, pid) =>
-    api.delete(`${USERS_API}/${uid}/deletepoll/${POLLS_API}/${pid}`)
+    api.delete(`${USERS_API}/${uid}/deletepoll/polls/${pid}`)
+        .then(response => response.data);
+
+export const createResponse = (uid, pid, pollResponse) =>
+    api.put(`${USERS_API}/${uid}/poll/${pid}/response`, pollResponse)
+        .then(response => response.data);
+
+export const deleteResponse = (uid, pid) =>
+    api.delete(`${USERS_API}/${uid}/deleteresponse/polls/${pid}`)
+        .then(response => response.data);
+
+export const closePoll = (uid, pid, poll) =>
+    api.put(`${USERS_API}/${uid}/close/polls/${pid}`, poll)
+        .then(response => response.data);
+
+export const findAllPollsResponseById = (pid) =>
+    api.get(`${BASE_URL}/api/responses/polls/${pid}`)
         .then(response => response.data);
