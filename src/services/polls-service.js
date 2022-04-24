@@ -43,3 +43,7 @@ export const closePoll = (uid, pid, poll) =>
 export const findAllPollsResponseById = (pid) =>
     api.get(`${BASE_URL}/api/responses/polls/${pid}`)
         .then(response => response.data);
+
+export const findPollResponseByPollIdAndUserId = (pid, uid) =>
+    api.get(`${USERS_API}/${uid}/response/polls/${pid}`)
+        .then(response => response.data);
