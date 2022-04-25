@@ -3,24 +3,32 @@
  */
 import {createTuit, deleteTuitByContent, findAllTuits, findTuitById} from "../services/tuits-service";
 import {createUser, deleteUsersByUsername} from "../services/users-service";
-import {closePoll, createPoll, deletePollByQuestion, findAllPolls, findPollById} from "../services/polls-service";
+import {
+    closePoll,
+    createPoll,
+    deletePoll,
+    deletePollByQuestion,
+    findAllPolls,
+    findPollById
+} from "../services/polls-service";
+import {wait} from "@testing-library/user-event/dist/utils";
 
-const MOCKED_USERS_1 = {_id: 25, username: "creator", password: "bob789", email: "bob789@mail.com"}
-const MOCKED_USERS_2 = {_id: 52, username: "response", password: "bob789", email: "bsdf@mail.com"}
-const MOCKED_POST = [
-    {_id: 12, pollQuestion: "first Q",
-        pollOptions: ["1o","2o"],
-        createdBy: MOCKED_USERS_1,
-        closed: true},
-    {_id: 34, pollQuestion: "second Q",
-        pollOptions: ["3o","4o"],
-        createdBy: MOCKED_USERS_1,
-        closed: false},
-    {_id: 56, pollQuestion: "second Q",
-        pollOptions: ["5o","6o","7o"],
-        createdBy: MOCKED_USERS_1,
-        closed: true},
-];
+// const MOCKED_USERS_1 = {_id: 25, username: "creator", password: "bob789", email: "bob789@mail.com"}
+// const MOCKED_USERS_2 = {_id: 52, username: "response", password: "bob789", email: "bsdf@mail.com"}
+// const MOCKED_POST = [
+//     {_id: 12, pollQuestion: "first Q",
+//         pollOptions: ["1o","2o"],
+//         createdBy: MOCKED_USERS_1,
+//         closed: true},
+//     {_id: 34, pollQuestion: "second Q",
+//         pollOptions: ["3o","4o"],
+//         createdBy: MOCKED_USERS_1,
+//         closed: false},
+//     {_id: 56, pollQuestion: "second Q",
+//         pollOptions: ["5o","6o","7o"],
+//         createdBy: MOCKED_USERS_1,
+//         closed: true},
+// ];
 
 describe('can create poll with REST API', () => {
 
@@ -70,7 +78,7 @@ describe('can close poll with REST API', () => {
         password: 'charlie@zeus',
     }
 
-    const pollTest = {
+    const pollTest2 = {
         pollQuestion: "first Q",
         pollOptions: ["1o","2o"],
         closed: false
@@ -94,13 +102,17 @@ describe('can close poll with REST API', () => {
     test('can close poll using Poll REST API', async () => {
 
         const newUser = await createUser(charlie2);
-        const newPoll = await createPoll(newUser._id, pollTest);
+        const newPoll = await createPoll(newUser._id, pollTest2);
 
         expect(newUser.username).toEqual(charlie2.username);
-        expect(newPoll.pollQuestion).toEqual(pollTest.pollQuestion);
-        expect(newPoll.closed).toEqual(pollTest.closed);
+        expect(newPoll.pollQuestion).toEqual(pollTest2.pollQuestion);
+        expect(newPoll.closed).toEqual(pollTest2.closed);
         expect(newPoll.closed).toEqual(false);
         await closePoll(newUser._id, newPoll._id, newPoll);
+        console.log(newPoll);
+        await wait(4000);
+        //add some time lag
+
         expect(newPoll.closed).toEqual(true);
 
     });
@@ -130,8 +142,9 @@ describe('can delete poll with REST API', () => {
 
     test('can delete poll using REST API',async () => {
         const newUser = await createUser(user);
-        await createPoll(newUser._id, secondPoll);
-        const result = await deletePollByQuestion('second Q');
+        const poll2 = await createPoll(newUser._id, secondPoll);
+        const result = await deletePoll(newUser._id, poll2._id);
+
         expect(result.deletedCount).toBeGreaterThanOrEqual(1);
     });
 });
@@ -177,25 +190,26 @@ describe('can retrieve a poll by their primary key with REST API', () => {
 });
 
 describe('can retrieve all polls with REST API', () => {
-    const polls = [
-        {_id: 12, pollQuestion: "first Q",
-            pollOptions: ["1o","2o"],
-            createdBy: MOCKED_USERS_1,
-            closed: true},
-        {_id: 34, pollQuestion: "second Q",
-            pollOptions: ["3o","4o"],
-            createdBy: MOCKED_USERS_1,
-            closed: false},
-        {_id: 56, pollQuestion: "third Q",
-            pollOptions: ["5o","6o","7o"],
-            createdBy: MOCKED_USERS_1,
-            closed: true},
-    ];
     const user = {
         username: 'james123',
         email: 'james123@mail.com',
         password: 'james@123',
     };
+    const polls = [
+        {_id: 12, pollQuestion: "first Q",
+            pollOptions: ["1o","2o"],
+            createdBy: user,
+            closed: true},
+        {_id: 34, pollQuestion: "second Q",
+            pollOptions: ["3o","4o"],
+            createdBy: user,
+            closed: false},
+        {_id: 56, pollQuestion: "third Q",
+            pollOptions: ["5o","6o","7o"],
+            createdBy: user,
+            closed: true},
+    ];
+
 
     beforeAll(async () => {
         const newUser = await createUser(user);
