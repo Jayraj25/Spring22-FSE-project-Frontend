@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import Poll from "../components/polls/poll";
 import {screen, render} from "@testing-library/react";
 import {HashRouter} from "react-router-dom";
