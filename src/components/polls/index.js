@@ -28,9 +28,7 @@ const Polls = ({polls = [], refreshPolls}) => {
 
     return (
         <div>
-            <h1>Polls</h1>
             <ul className="ttr-tuits list-group">
-                <span>list of polls</span>
                 {
                     polls.map && polls.map(poll => <Poll key={poll._id} poll={poll}
                     deletePoll={deletePoll}/>)
