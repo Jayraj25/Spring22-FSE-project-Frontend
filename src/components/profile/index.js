@@ -9,7 +9,8 @@ import TuitsAndReplies from "./tuits-and-replies";
 import Media from "./media";
 import MyLikes from "./my-likes";
 import MyDislikes from "./my-dislikes";
-import MyPollResponses from "./my-pollResponses";
+import MyCreatedPolls from "./my-createdPolls";
+import MyRespondedPolls from "./my-respondedPolls";
 
 /**
  * @returns {JSX.Element} the profile component
@@ -87,25 +88,22 @@ const Profile = () => {
                                   className={`nav-link ${location.pathname.indexOf('mylikes') >= 0 ? 'active':''}`}>
                                 Likes</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link to="/profile/tuits-and-replies"
-                                  className={`nav-link ${location.pathname.indexOf('tuits-and-replies') >= 0 ? 'active':''}`}>
-                                Tuits & replies</Link>
-                        </li>
+
                         <li className="nav-item">
                             <Link to="/profile/dislikes"
                                   className={`nav-link ${location.pathname.indexOf('dislikes') >= 0 ? 'active':''}`}>
                                 Dislikes</Link>
                         </li>
+
                         <li className="nav-item">
-                            <Link to="/profile/media"
-                                  className={`nav-link ${location.pathname.indexOf('media') >= 0 ? 'active':''}`}>
-                                Media</Link>
+                            <Link to="/profile/createdPolls"
+                                  className={`nav-link ${location.pathname.indexOf('createdPolls') >= 0 ? 'active':''}`}>
+                                Created Polls</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/profile/my-pollResponses"
-                                  className={`nav-link ${location.pathname.indexOf('my-pollResponses') >= 0 ? 'active':''}`}>
-                                Response Poll</Link>
+                            <Link to="/profile/respondedPolls"
+                                  className={`nav-link ${location.pathname.indexOf('respondedPolls') >= 0 ? 'active':''}`}>
+                                Responded Polls</Link>
                         </li>
                     </ul>
                 </div>
@@ -116,7 +114,8 @@ const Profile = () => {
                 <Route path="/media" element={<Media/>}/>
                 <Route path="/mylikes" element={<MyLikes/>}/>
                 <Route path="/dislikes" element={<MyDislikes/>}/>
-                <Route path="/my-pollResponses" element={<MyPollResponses/>}/>
+                <Route path="/createdPolls" element={<MyCreatedPolls/>}/>
+                <Route path="/respondedPolls" element={<MyRespondedPolls/>}/>
             </Routes>
         </div>
     );
