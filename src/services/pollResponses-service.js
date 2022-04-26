@@ -2,6 +2,7 @@
  * @file Gets the polls APIs for rendering in frontend
  */
 import axios from "axios";
+import poll from "../components/polls/poll";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 console.log(BASE_URL);
@@ -33,6 +34,14 @@ export const updatePollResponse = (uid,pid, pollResponse) =>
     api.post(`${USERS_API}/${uid}/poll/${pid}`, pollResponse)
         .then(response => response.data);
 
-export const deletePoll = (uid, pid) =>
+export const deleteResponse = (uid, pid) =>
     api.delete(`${USERS_API}/${uid}/deleteresponse/polls/${pid}`)
         .then(response => response.data);
+
+export const userTogglesPollResponse = (uid, pid, pollResponse) =>
+    api.put(`${USERS_API}/${uid}/poll/${pid}/response`, pollResponse)
+        .then(response => response.data)
+
+export const findPollResponseByPollIdByUserId = (uid, pid) =>
+    api.get(`${USERS_API}/${uid}/response/polls/${pid}`)
+        .then(response => response.data)
