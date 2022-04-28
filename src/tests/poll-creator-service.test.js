@@ -87,11 +87,12 @@ describe('can close poll with REST API', () => {
     };
 
     // setup test before running test
+
     beforeAll(async () => {
         // remove any/all user and polls to make sure we create it in the test
        await  deletePollByQuestion('first Q');
         return await deleteUsersByUsername(charlie2.username);
-    });
+
 
     // clean up after test runs
     afterAll(() => {
@@ -113,9 +114,12 @@ describe('can close poll with REST API', () => {
         expect(newPoll.closed).toEqual(false);
         await closePoll(newUser._id, newPoll._id, newPoll);
         console.log(newPoll);
+
         const newPoll2 = await findPollById(newPoll._id);
 
         expect(newPoll2.closed).toEqual(true);
+
+ 
 
     });
 });
