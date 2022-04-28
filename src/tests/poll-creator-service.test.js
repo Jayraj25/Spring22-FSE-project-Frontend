@@ -66,6 +66,8 @@ describe('can create poll with REST API', () => {
 
         expect(newUser.username).toEqual(charlie.username);
         expect(newPoll.pollQuestion).toEqual(pollTest.pollQuestion);
+        expect(newPoll.pollOptions).toEqual(pollTest.pollOptions);
+
     });
 });
 
@@ -85,11 +87,12 @@ describe('can close poll with REST API', () => {
     };
 
     // setup test before running test
-    beforeAll(() => {
+
+    beforeAll(async () => {
         // remove any/all user and polls to make sure we create it in the test
-        deletePollByQuestion('first Q');
-        return deleteUsersByUsername(charlie2.username);
-    });
+       await  deletePollByQuestion('first Q');
+        return await deleteUsersByUsername(charlie2.username);
+
 
     // clean up after test runs
     afterAll(() => {
@@ -106,14 +109,17 @@ describe('can close poll with REST API', () => {
 
         expect(newUser.username).toEqual(charlie2.username);
         expect(newPoll.pollQuestion).toEqual(pollTest2.pollQuestion);
+        expect(newPoll.pollOptions).toEqual(pollTest2.pollOptions);
         expect(newPoll.closed).toEqual(pollTest2.closed);
         expect(newPoll.closed).toEqual(false);
         await closePoll(newUser._id, newPoll._id, newPoll);
         console.log(newPoll);
-        await wait(4000);
-        //add some time lag
 
-        expect(newPoll.closed).toEqual(true);
+        const newPoll2 = await findPollById(newPoll._id);
+
+        expect(newPoll2.closed).toEqual(true);
+
+ 
 
     });
 });
