@@ -48,7 +48,7 @@ export const findAllPollsResponseById = (pid) =>
         .then(response => response.data);
 
 export const deletePollByQuestion = (pollQuestion) =>
-    axios.delete(`${BASE_URL}/api/polls/deleteByQuestion/${pollQuestion}`,pollQuestion)
+    api.delete(`${BASE_URL}/api/polls/deleteByQuestion/${pollQuestion}`,pollQuestion)
         .then(response => response.data);
 
 export const findPollResponseByPollIdAndUserId = (pid, uid) =>
@@ -57,4 +57,3 @@ export const findPollResponseByPollIdAndUserId = (pid, uid) =>
 
 export const findPollsRespondedByUser = (uid) =>
     api.get(`${USERS_API}/${uid}/pollsresponded`).then(response => response.data);
-

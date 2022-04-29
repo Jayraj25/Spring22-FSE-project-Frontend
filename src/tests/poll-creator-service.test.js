@@ -88,10 +88,10 @@ describe('can close poll with REST API', () => {
 
     // setup test before running test
 
-    beforeAll(async () => {
+    beforeAll( () => {
         // remove any/all user and polls to make sure we create it in the test
-       await  deletePollByQuestion('first Q');
-        return await deleteUsersByUsername(charlie2.username);
+         deletePollByQuestion('first Q');
+        return  deleteUsersByUsername(charlie2.username);
     });
 
     // clean up after test runs
@@ -138,9 +138,10 @@ describe('can delete poll with REST API', () => {
     };
 
     beforeAll(() => {
-        deleteUsersByUsername(user.username);
         deletePollByQuestion('second Q');
+        return deleteUsersByUsername(user.username);
     });
+
 
     afterAll(() => {
         return deleteUsersByUsername(user.username);
@@ -171,13 +172,14 @@ describe('can retrieve a poll by their primary key with REST API', () => {
     };
 
     beforeAll(() => {
-        deleteUsersByUsername(user.username);
         deletePollByQuestion(thirdPoll.pollQuestion);
+        return deleteUsersByUsername(user.username);
     });
+
 
     afterAll(() => {
         deleteUsersByUsername(user.username);
-        deletePollByQuestion(thirdPoll.pollQuestion);
+        return deletePollByQuestion(thirdPoll.pollQuestion);
     });
 
     test('can read poll by primary key from REST API', async () => {
@@ -219,9 +221,9 @@ describe('can retrieve all polls with REST API', () => {
 
     beforeAll(async () => {
         const newUser = await createUser(user);
-        await deletePollByQuestion("first Q");
-        await deletePollByQuestion("second Q");
-        await deletePollByQuestion("third Q");
+        // deletePollByQuestion("first Q");
+        // deletePollByQuestion("second Q");
+        // deletePollByQuestion("third Q");
         polls.map(poll => {
             createPoll(newUser._id,{
                 pollQuestion: poll.pollQuestion,
@@ -229,13 +231,14 @@ describe('can retrieve all polls with REST API', () => {
                 closed: poll.closed
             });
         });
+        return
     });
 
     afterAll(async () => {
-        await deleteUsersByUsername(user.username);
         await deletePollByQuestion("first Q");
         await deletePollByQuestion("second Q");
         await deletePollByQuestion("third Q");
+        await deleteUsersByUsername(user.username);
     });
 
     test('Can read all polls using REST API', async () => {
