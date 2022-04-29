@@ -92,7 +92,7 @@ describe('can close poll with REST API', () => {
         // remove any/all user and polls to make sure we create it in the test
        await  deletePollByQuestion('first Q');
         return await deleteUsersByUsername(charlie2.username);
-
+    });
 
     // clean up after test runs
     afterAll(() => {
