@@ -53,6 +53,7 @@ const Poll = ({poll, deletePoll}) => {
     const pollClosed = () =>
         setClosed('poll is closed')
 
+    //closes the poll only if metod was successfull
     const closePoll = () =>
         service.closePoll('my', poll._id).then(r =>
         {if (r.acknowledged)
