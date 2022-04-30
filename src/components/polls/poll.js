@@ -5,7 +5,14 @@ import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import {Modal} from "react-bootstrap";
 import {CanvasJSChart} from "canvasjs-react-charts";
-import {closePoll, createResponse, deletePoll, deleteResponse, findAllPolls} from "../../services/polls-service";
+import {
+    closePoll,
+    createResponse,
+    deletePoll,
+    deleteResponse,
+    findAllPolls,
+    findPollById
+} from "../../services/polls-service";
 import * as service from "../../services/polls-service";
 
 /**
@@ -45,8 +52,15 @@ const Poll = ({poll, deletePoll}) => {
     }
     const pollClosed = () =>
         setClosed('poll is closed')
+
     const closePoll = () =>
-        service.closePoll('my', poll._id).then(pollClosed)
+        service.closePoll('my', poll._id).then(r =>
+        {if (r.acknowledged)
+        {
+            setIsClosed(true)
+            setClosed('poll is closed')
+        }
+        })
     const isPollClosed = () =>
         setIsClosed(poll.closed).then(findAllPolls)
 
@@ -175,7 +189,8 @@ const Poll = ({poll, deletePoll}) => {
                                     isClosed
                                         ? <a  className="btn btn-secondary"
                                               style={{ margin: "10px"}}>poll closed</a>
-                                        : <a onClick={() => closePoll('my', poll._id).then(setIsClosed(true))}
+                                        : <a onClick={() => closePoll('my', poll._id).then()}
+
                                              tabIndex="1" className="btn btn-danger" style={{margin:"10px"}}>close poll</a>
                                 }
                             </div>
