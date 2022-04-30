@@ -45,8 +45,15 @@ const Poll = ({poll, deletePoll}) => {
     }
     const pollClosed = () =>
         setClosed('poll is closed')
-    const closePoll = () =>
-        service.closePoll('my', poll._id).then(pollClosed)
+    
+   const closePoll = () =>
+        service.closePoll('my', poll._id).then(r =>
+        {if (r.acknowledged)
+        {
+            setIsClosed(true)
+            setClosed('poll is closed')
+        }
+        })
     const isPollClosed = () =>
         setIsClosed(poll.closed).then(findAllPolls)
 
@@ -175,7 +182,7 @@ const Poll = ({poll, deletePoll}) => {
                                     isClosed
                                         ? <a  className="btn btn-secondary"
                                               style={{ margin: "10px"}}>poll closed</a>
-                                        : <a onClick={() => closePoll('my', poll._id).then(setIsClosed(true))}
+                                        : <a onClick={() => closePoll('my', poll._id).then()}
                                              tabIndex="1" className="btn btn-danger" style={{margin:"10px"}}>close poll</a>
                                 }
                             </div>
